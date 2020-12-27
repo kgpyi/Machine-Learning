@@ -30,3 +30,13 @@ src = ScriptRunConfig(source_directory=script_folder,
                       script='train.py',
                       compute_target=compute_target,
                       environment=sklearn_env)
+
+
+best_run_metrics=automl_run.get_metrics()
+for primary_metric in best_run_metrics:
+    metric=best_run_metrics[primary_metric]
+    print(primary_metric,metric)
+
+
+best_automl_run,best_automl_model=automl_run.get_output()
+joblib.dump(value=best_automl_model,filename='automl_model.joblib')
