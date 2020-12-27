@@ -12,3 +12,21 @@ src = ScriptRunConfig(source_directory='.',
   
   from azureml.core import Environment
 sklearn_env = Environment.get(workspace=ws, name='AzureML-Tutorial')
+
+
+%%writefile conda_dependencies.yml
+dependencies:
+- python=3.6.2
+- scikit-learn
+- pip:
+  - azureml-defaults
+  
+  
+  
+  rom azureml.core import Environment
+from azureml.core import ScriptRunConfig
+sklearn_env = Environment.from_conda_specification(name = 'sklearn-env', file_path = './envs/conda_dependencies.yml')
+src = ScriptRunConfig(source_directory=script_folder,
+                      script='train.py',
+                      compute_target=compute_target,
+                      environment=sklearn_env)
