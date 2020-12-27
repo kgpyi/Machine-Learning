@@ -34,4 +34,5 @@ We can use feature engineering and reduce the imbalance of the dataset which was
 
 
 ## Proof of cluster clean up
-![alt text](http://https://github.com/kgpyi/Machine-Learning/blob/master/Udacity/Machine%20Learning%20Engineer%20with%20Microsoft%20Azure%20Nanodegree%20Program/Optimizing%20an%20ML%20Pipeline%20in%20Azure/deleteComputeInstance.png/to/img.png)
+![deleteComputeInstance](https://user-images.githubusercontent.com/34343621/103179226-b484a280-48af-11eb-9e36-28a93ccc1892.png)
+
