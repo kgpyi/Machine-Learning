@@ -98,6 +98,8 @@ After running the file I got:
 
 ![26](https://user-images.githubusercontent.com/34343621/115167095-c646bb80-a0d3-11eb-9a9e-22f47d48e6b9.png)
 
+Benchmark result:
+![29](https://user-images.githubusercontent.com/34343621/115168349-33f4e680-a0d8-11eb-8917-8323c6a0822f.png)
 
 6. Use Jupyter Notebook to create, publish and consume a pipeline.
 Pipeline being created. 
@@ -129,7 +131,9 @@ We can see the pipeline endpoints as well.
 
 
 ## Screen Recording
-*TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
+Here is the link to recording: - https://youtu.be/7SYZfzj4UC8
 
 ## Standout Suggestions
-*TODO (Optional):* This is where you can provide information about any standout suggestions that you have attempted.
+1. The data is highly imbalanced is nothing much is done to overcome this, result is most probably biased. 
+2. More training time can better metric for performance can change quite a lot of things. 
+3. AutoML is much better way and also things can be run in parallel, if compute costs allows that - it can give some fancinating views with data which is more even. 
