@@ -1,48 +1,90 @@
-*NOTE:* This file is a template that you can use to create the README for your project. The *TODO* comments below will highlight the information you should be sure to include.
 
-# Your Project Title Here
 
-*TODO:* Write a short introduction to your project.
+# Heart Failure Prediction
+
+Cardiovascular diseases (CVDs) are the number 1 cause of death globally, taking an estimated 17.9 million lives each year, which accounts for 31% of all deaths worlwide.
+Heart failure is a common event caused by CVDs and this dataset contains 12 features that can be used to predict mortality by heart failure.
+
+Most cardiovascular diseases can be prevented by addressing behavioural risk factors such as tobacco use, unhealthy diet and obesity, physical inactivity and harmful use of alcohol using population-wide strategies.
+
+People with cardiovascular disease or who are at high cardiovascular risk (due to the presence of one or more risk factors such as hypertension, diabetes, hyperlipidaemia or already established disease) need early detection and management wherein a machine learning model can be of great help.
+
 
 ## Project Set Up and Installation
-*OPTIONAL:* If your project has any special installation steps, this is where you should put it. To turn this project into a professional portfolio project, you are encouraged to explain how to set up this project in AzureML.
+As I did all of the work in dacity Lab there was no need of any special installations, Udacity and Microsoft took care of it very neatly. All I had to do was lauch ML Studio. 
 
 ## Dataset
 
 ### Overview
-*TODO*: Explain about the data you are using and where you got it from.
+The dataset is taken from Kaggle, a place for open source datasets. There are 12 coloums which are: age, anaemia, creatinine, diabetes, ejection_fraction, high_blood_pressure, platelets, serum_creatinine, serum_sodium, sex, smoking and time. 13th coloum is the target which is DEATH_EVENT. 
 
 ### Task
-*TODO*: Explain the task you are going to be solving with this dataset and the features you will be using for it.
+The task is to build model with AutoML as well as HyperDrive, compare both of them and the one which is better is to be depolyed. As target coloum is DEATH_EVENT which has entires in binary result will be binary as well. The 0 zero entry indicates that death will not occur while 1 is opposite of that. 
 
 ### Access
-*TODO*: Explain how you are accessing the data in your workspace.
+To access the dataset URL method is used, although creating dataset could also have been used. 
 
 ## Automated ML
-*TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
+As the ned results were 0 and 1 only and that too only balanced dataset, classification with AutoML was best option. Along with it the other parameters which were given were:
+n_cross_validations = 8
+It is used to determine how many cross balidations to perform when user validation data is not specified. 
+primary_metric = accuracy
+It is used to find best alogorithm in AutoML with respect to accuracy.
+enable_early_stopping = True
+This prevents the model to not fall in loop if score of primray metric which in my case was accuracy does not seem to improve. 
+experiment_timeout_minutes = 20
+It is amount of time iterations can take before ending, we set the value to 20 mintues here as our dataset is not that large. 
+max_concurrent_iterations = 15
+Number of iterartions that can run at same time making AutoML consume less time and improve predections.
 
 ### Results
-*TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
+The best model obtained from AutoML run was given by VotingEnsemble with accuracy of about 88%. 
+To increase this accuracy, experiment can be run for longer time, and changing in primray metric can be effective as well.
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+AutoML Run
+![1](https://user-images.githubusercontent.com/34343621/115318245-02911f00-a19b-11eb-83b7-3bddce68bea7.png)
+
+RunDetails
+![2](https://user-images.githubusercontent.com/34343621/115318247-03c24c00-a19b-11eb-8bd1-6a8f363e00d0.png)
+
+Best AutoML Model
+![3](https://user-images.githubusercontent.com/34343621/115318248-045ae280-a19b-11eb-88df-def90e38f842.png)
+
+![4](https://user-images.githubusercontent.com/34343621/115318249-04f37900-a19b-11eb-88cf-df660affa4ed.png)
+
 
 ## Hyperparameter Tuning
-*TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
-
+As classifcation was used in AutoML for binrary entries, the algorithm chosen with Hyperparameter Tuning is Logistic regression. 
+Accuracy was kept the primary metric same as AutoML to compare them so that one can be deployed. 
+max_total_runs = 30
+max_cocurrent_runs = 5
+These numbers were kept to increase the effieceny. Also early termination policy was used. 
 
 ### Results
-*TODO*: What are the results you got with your model? What were the parameters of the model? How could you have improved it?
+The Hyperdrive run came quite close to AutoMl with accuracy of 86.6%, surely increasing the number of runs would have narrowered the gap even fruther. Also incudling other hyperparmetres can change the model quite a much and make it equal to AutoML which tunning. 
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+HyperDrive Run
+![5](https://user-images.githubusercontent.com/34343621/115319218-ee4e2180-a19c-11eb-8c88-435dfdbf5c6b.png)
+
+![6](https://user-images.githubusercontent.com/34343621/115319220-ef7f4e80-a19c-11eb-868c-760503b5b43b.png)
+
+![7](https://user-images.githubusercontent.com/34343621/115319221-f017e500-a19c-11eb-814e-fe53078be6d3.png)
+
+Best Model 
+![8](https://user-images.githubusercontent.com/34343621/115319224-f017e500-a19c-11eb-8f2c-e216dba83a65.png)
+
 
 ## Model Deployment
-*TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
+There was not much difference in AutoML and HyperDrive run but since AutoML was bit higher I went with deployment of AutoML. The model is deployed using Azure Container Instance(ACI) webservices which had application insights and gave a uri to visulaize it. 
+To test it, two data entries were given, and the answer were verfiered from the Kaggle notebooks. 
+
+![90](https://user-images.githubusercontent.com/34343621/115319531-a5e33380-a19d-11eb-91f7-bd4f825b29a4.png)
+
+![91](https://user-images.githubusercontent.com/34343621/115319537-a7146080-a19d-11eb-86df-ac338631ddaa.png)
+
+![93](https://user-images.githubusercontent.com/34343621/115319540-a7acf700-a19d-11eb-837c-ae446fce365a.png)
 
 ## Screen Recording
-*TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
-- A working model
-- Demo of the deployed  model
-- Demo of a sample request sent to the endpoint and its response
+Link to recording - https://youtu.be/N7GIu3pQkno
 
-## Standout Suggestions
-*TODO (Optional):* This is where you can provide information about any standout suggestions that you have attempted.
+
