@@ -27,19 +27,19 @@ To access the dataset URL method is used, although creating dataset could also h
 ## Automated ML
 As the ned results were 0 and 1 only and that too only balanced dataset, classification with AutoML was best option. Along with it the other parameters which were given were:
 n_cross_validations = 8
-It is used to determine how many cross balidations to perform when user validation data is not specified. 
+It is used to determine how many cross-validations to perform when user validation data is not specified. 
 primary_metric = accuracy
-It is used to find best alogorithm in AutoML with respect to accuracy.
+It is used to find the best algorithm in AutoML with respect to accuracy.
 enable_early_stopping = True
-This prevents the model to not fall in loop if score of primray metric which in my case was accuracy does not seem to improve. 
+This prevents the model to not fall into the loop if the score of primary metric which in my case was accuracy does not seem to improve. 
 experiment_timeout_minutes = 20
-It is amount of time iterations can take before ending, we set the value to 20 mintues here as our dataset is not that large. 
+It is the number of time iterations can take before ending, we set the value to 20 minutes here as our dataset is not that large. 
 max_concurrent_iterations = 15
-Number of iterartions that can run at same time making AutoML consume less time and improve predections.
+A number of iterations that can run at the same time making AutoML consume less time and improve predictions.
 
 ### Results
-The best model obtained from AutoML run was given by VotingEnsemble with accuracy of about 88%. 
-To increase this accuracy, experiment can be run for longer time, and changing in primray metric can be effective as well.
+The best model obtained from the AutoML run was given by VotingEnsemble with an accuracy of about 88%. 
+To increase this accuracy, experiments can be run for a longer time, and changing in primary metric can be effective as well.
 
 AutoML Run
 ![1](https://user-images.githubusercontent.com/34343621/115318245-02911f00-a19b-11eb-83b7-3bddce68bea7.png)
@@ -54,14 +54,14 @@ Best AutoML Model
 
 
 ## Hyperparameter Tuning
-As classifcation was used in AutoML for binrary entries, the algorithm chosen with Hyperparameter Tuning is Logistic regression. 
+As classification was used in AutoML for binary entries, the algorithm chosen with Hyperparameter Tuning is Logistic regression. 
 Accuracy was kept the primary metric same as AutoML to compare them so that one can be deployed. 
 max_total_runs = 30
 max_cocurrent_runs = 5
-These numbers were kept to increase the effieceny. Also early termination policy was used. 
+These numbers were kept to increase efficiency. Also, an early termination policy was used. 
 
 ### Results
-The Hyperdrive run came quite close to AutoMl with accuracy of 86.6%, surely increasing the number of runs would have narrowered the gap even fruther. Also incudling other hyperparmetres can change the model quite a much and make it equal to AutoML which tunning. 
+The Hyperdrive run came quite close to AutoMl with an accuracy of 86.6%, surely increasing the number of runs would have narrowed the gap even further. Also, including other hyperparameters can change the model quite a lot and make it equal to AutoML which tunning. 
 
 HyperDrive Run
 ![5](https://user-images.githubusercontent.com/34343621/115319218-ee4e2180-a19c-11eb-8c88-435dfdbf5c6b.png)
@@ -75,10 +75,12 @@ Best Model
 
 
 ## Model Deployment
-There was not much difference in AutoML and HyperDrive run but since AutoML was bit higher I went with deployment of AutoML. The model is deployed using Azure Container Instance(ACI) webservices which had application insights and gave a uri to visulaize it. 
-To test it, two data entries were given, and the answer were verfiered from the Kaggle notebooks. 
+There was not much difference in AutoML and HyperDrive run but since AutoML was a bit higher I went with the deployment of AutoML. The model is deployed using Azure Container Instance(ACI) web services which had application insights and gave a URI to visualize it. 
+To test it, two data entries were given, and the answer was verified from the Kaggle notebooks. 
 
 ![90](https://user-images.githubusercontent.com/34343621/115319531-a5e33380-a19d-11eb-91f7-bd4f825b29a4.png)
+
+![94](https://user-images.githubusercontent.com/34343621/115753166-8411c880-a3b8-11eb-9ac6-9d3f39dcece7.png)
 
 ![91](https://user-images.githubusercontent.com/34343621/115319537-a7146080-a19d-11eb-86df-ac338631ddaa.png)
 
